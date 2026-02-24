@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kadapa Kalyanam Chapters 1-3</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-chapters="1-3">
+  <div id="app">
+    <aside id="leftCol">
+      <section class="panel">
+        <h1 class="title">Kadapa Kalyanam: The Masterpiece</h1>
+        <p class="small">Destiny-Fixed cinematic life-sim. Choices change flavor, never break destiny.</p>
+        <div class="statRow">Affection <span id="affectionVal"></span>
+          <div class="meter affection"><span></span></div>
+        </div>
+        <div class="statRow">Blush Meter <span id="blushVal"></span>
+          <div class="meter blush"><span></span></div>
+        </div>
+        <div class="statRow">Energy <span id="energyVal"></span>
+          <div class="meter energy"><span></span></div>
+        </div>
+      </section>
+      <section class="panel">
+        <div class="badge" id="chapterBadge">Chapter</div>
+        <div class="badge" id="sceneBadge">Scene</div>
+        <p id="saveInfo" class="small">Auto-save pending...</p>
+        <div class="controls">
+          <button id="restartBtn">Restart Chapter</button>
+          <button id="resetBtn">Clear Save</button>
+        </div>
+      </section>
+      <section id="miniGame" class="panel">
+        <h3 id="miniTitle">Mini-game</h3>
+        <p id="miniHint" class="small"></p>
+        <canvas id="gameCanvas"></canvas>
+      </section>
+    </aside>
+
+    <main id="stage">
+      <section id="bg" class="panel">
+        <div class="layer"><canvas id="bgCanvas"></canvas></div>
+        <div class="layer"><canvas id="fxCanvas"></canvas></div>
+        <div id="portraitWrap">
+          <div id="portraitL" class="portrait" data-name="Yagnesh"></div>
+          <div id="portraitR" class="portrait" data-name="Yogitha"></div>
+        </div>
+      </section>
+      <section class="panel" id="dialogue">
+        <div id="speaker">Narrator</div>
+        <div id="text"></div>
+      </section>
+      <section class="panel" id="choices"></section>
+    </main>
+  </div>
+
+  <script src="scenes.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
