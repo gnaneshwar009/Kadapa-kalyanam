@@ -1,6 +1,6 @@
 # Kadapa Kalyanam - Browser Build
 
-Offline, responsive, multi-part HTML narrative life-sim.
+Offline, responsive, multi-part HTML narrative life-simulation game.
 
 ## Run
 Open any file directly in your browser:
@@ -9,16 +9,23 @@ Open any file directly in your browser:
 - `chapters-6-9.html`
 - `chapters-9-12.html`
 
-No server is required.
+No server required.
 
-## Highlights
-- Extended gradual Destiny-Fixed story arc (11th crush → confession → dating → marriage → post-marriage life)
-- Decision trees with tonal variation (funny, shy, stressed, complex, happy) that always converge to happy ending
-- Robust local JSON autosave (`localStorage`) after each scene/decision
-- Cinematic mini-games integrated in flow: Shadow Follow, Jeelakarra Bellam, Talambralu
-- Adaptive UI and canvas staging with contextual backgrounds (classrooms, roads, houses, trees, bushes, sky, buildings, mandapam)
-- Final in-story debug/audit chapter documenting affection/blush fill windows and Destiny-Fixed convergence logic
+## Story Structure (Gradual Arc)
+- **11th Class (Ch 1-3):** silent crush, corridor dynamics, rain/strike protection, trust building
+- **12th Mid Acceptance (Ch 4-6):** exam pressure, confession, acceptance, transition to maturity
+- **BTech Dating & Talking (Ch 7-9):** deeper conversations, future planning, complex but healthy moments
+- **After BTech Marriage (Ch 10-12):** wedding rituals, married life, anniversary, final debug/audit ending
 
-## Save system
-Each chapter bundle is resumable in-place.
-Use **Clear Save** to reset and **Restart Chapter** to restart only the current bundle.
+## Features
+- Destiny-Fixed logic: choices change flavor/stats, never break happy ending
+- Expanded decision trees with funny, shy, stressed, complex, and joyful tones
+- Auto-save after every scene/decision using local JSON (`localStorage`)
+- Integrated mini-games: Shadow Follow, Jeelakarra Bellam, Talambralu
+- Improved cinematic UI and adaptive layout for mobile/desktop
+- Contextual canvas backgrounds for classrooms, roads, houses, trees, bushes, sky, buildings, and mandapam
+- In-story audit chapter explaining affection/blush cap windows and convergence math
+
+## Save & Controls
+- **Restart Chapter**: restart only current chapter bundle
+- **Clear Save**: remove local progress for current save key

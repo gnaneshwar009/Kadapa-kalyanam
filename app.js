@@ -1,5 +1,5 @@
 (function(){
-  const SAVE_KEY = 'kadapa-kalyanam-save-v2';
+  const SAVE_KEY = 'kadapa-kalyanam-save-v3';
   const chapterRange = document.body.dataset.chapters || '1-6';
   const [fromC, toC] = chapterRange.split('-').map(Number);
 
@@ -285,6 +285,20 @@
     osc.stop(ctx.currentTime + duration);
   }
 
+
+  function animateDialogue(text){
+    const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) { el.text.textContent = text; return; }
+    let i = 0;
+    el.text.textContent = '';
+    const step = () => {
+      i += 3;
+      el.text.textContent = text.slice(0, i);
+      if (i < text.length) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+
   function renderScene(scene, persist=true){
     if (!scene) return;
     state.currentSceneId = scene.id;
@@ -295,7 +309,7 @@
     drawFX(scene);
     setPortraits(scene.speaker);
     el.speaker.textContent = scene.speaker;
-    el.text.textContent = scene.text;
+    animateDialogue(scene.text);
     el.choices.innerHTML = '';
 
     if (scene.effects?.time === 'morning') playTone(330, 0.12, 'triangle', 0.03);
@@ -338,9 +352,9 @@
 
   function nextAfterMiniGame(type){
     const map = {
-      'shadow-follow': 'c2-s2',
-      'jeelakarra': 'c5-s4',
-      'talambralu': 'c5-s5'
+      'shadow-follow': (state.currentSceneId === 'c8-s1' ? 'c8-s2' : 'c2-s2'),
+      'jeelakarra': 'c10-s4',
+      'talambralu': 'c10-s5'
     };
     return map[type];
   }
