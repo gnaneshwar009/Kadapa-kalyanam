@@ -194,64 +194,119 @@
     for(let i = 0; i < 16; i++) bgCtx.fillRect(w * 0.11 + i*(w*0.05), h * 0.34, 8, 32);
   }
 
+  function drawHills(w, h, c1='#56739d', c2='#3d5479'){
+    bgCtx.fillStyle = c1;
+    bgCtx.beginPath();
+    bgCtx.moveTo(0, h * 0.68);
+    bgCtx.quadraticCurveTo(w * 0.2, h * 0.56, w * 0.45, h * 0.68);
+    bgCtx.quadraticCurveTo(w * 0.7, h * 0.78, w, h * 0.66);
+    bgCtx.lineTo(w, h);
+    bgCtx.lineTo(0, h);
+    bgCtx.closePath();
+    bgCtx.fill();
+    bgCtx.fillStyle = c2;
+    bgCtx.beginPath();
+    bgCtx.moveTo(0, h * 0.78);
+    bgCtx.quadraticCurveTo(w * 0.3, h * 0.66, w * 0.55, h * 0.79);
+    bgCtx.quadraticCurveTo(w * 0.8, h * 0.88, w, h * 0.76);
+    bgCtx.lineTo(w, h);
+    bgCtx.lineTo(0, h);
+    bgCtx.closePath();
+    bgCtx.fill();
+  }
+
+  function drawBushes(w, h, base='#2f7c4f'){
+    bgCtx.fillStyle = base;
+    for(let i = 0; i < 16; i++){
+      const x = i * (w / 15) - 10;
+      const y = h * (0.73 + (i % 3) * 0.01);
+      bgCtx.beginPath();
+      bgCtx.arc(x, y, 14, 0, Math.PI * 2);
+      bgCtx.arc(x + 14, y + 3, 12, 0, Math.PI * 2);
+      bgCtx.fill();
+    }
+  }
+
+  function drawSunOrMoon(w, h, warm=true){
+    bgCtx.globalAlpha = warm ? 0.8 : 0.55;
+    bgCtx.fillStyle = warm ? '#ffd99c' : '#dce8ff';
+    bgCtx.beginPath();
+    bgCtx.arc(w * 0.84, h * 0.16, warm ? 28 : 22, 0, Math.PI * 2);
+    bgCtx.fill();
+    bgCtx.globalAlpha = 1;
+  }
+
   function drawBackground(theme = ''){
     const w = el.bgCanvas.clientWidth;
     const h = el.bgCanvas.clientHeight;
     bgCtx.clearRect(0,0,w,h);
 
     if (theme.includes('classroom') || theme.includes('college-corridor') || theme.includes('exam')) {
-      drawSky('#b9d6ff', '#dde8fb');
+      drawSky('#c0dcff', '#e8efff');
+      drawSunOrMoon(w, h, true);
       drawClassroom();
-      drawBuilding(40, h * 0.36, 95, 92, '#708eb1');
-      drawBuilding(w - 150, h * 0.34, 108, 108, '#6783ab');
+      drawBuilding(40, h * 0.36, 95, 92, '#6f8eb5');
+      drawBuilding(w - 150, h * 0.34, 108, 108, '#6a84ad');
+      drawBushes(w, h, '#3f8e63');
       return;
     }
 
-    if (theme.includes('pelli') || theme.includes('mandapam') || theme.includes('vow') || theme.includes('anniversary')) {
-      drawSky('#3c2e63', '#a35a7c');
+    if (theme.includes('pelli') || theme.includes('mandapam') || theme.includes('vow') || theme.includes('anniversary') || theme.includes('wedding')) {
+      drawSky('#432f6f', '#b76187');
+      drawSunOrMoon(w, h, false);
+      drawHills(w, h, '#684d7f', '#4c365f');
       drawGround('#7b4a57');
       drawMandapam();
+      drawBushes(w, h, '#4c9a68');
       return;
     }
 
-    if (theme.includes('road') || theme.includes('street') || theme.includes('gate') || theme.includes('highway')) {
-      drawSky('#8dc8ff', '#f8b07b');
+    if (theme.includes('road') || theme.includes('street') || theme.includes('gate') || theme.includes('highway') || theme.includes('traffic')) {
+      drawSky('#8ecbff', '#f6b98f');
+      drawSunOrMoon(w, h, true);
       drawCloud(130, 80, 1.2);
       drawCloud(w - 180, 96, 1);
+      drawHills(w, h, '#6c8dad', '#4f6f8f');
       drawGround('#5f946a');
       drawRoad();
       drawTree(90, h * 0.68, 1.1);
       drawTree(w - 120, h * 0.67, 1.3);
       drawBuilding(24, h * 0.5, 110, 90, '#44617b');
       drawBuilding(w - 180, h * 0.48, 140, 110, '#5e6c89');
+      drawBushes(w, h, '#2f7e56');
       return;
     }
 
-    if (theme.includes('home') || theme.includes('gd-house') || theme.includes('shanthi')) {
-      drawSky('#9fc4ff', '#ffdcb1');
+    if (theme.includes('home') || theme.includes('gd-house') || theme.includes('shanthi') || theme.includes('courtyard')) {
+      drawSky('#a4cbff', '#ffd7b5');
+      drawSunOrMoon(w, h, true);
+      drawHills(w, h, '#7ea3a6', '#638286');
       drawGround('#6fa071');
       drawBuilding(70, h * 0.46, 150, 120, '#cb9e77');
       drawBuilding(w - 250, h * 0.44, 180, 130, '#b88e6a');
       drawTree(52, h * 0.64, 1.2);
       drawTree(w - 40, h * 0.62, 1.3);
-      bgCtx.fillStyle = '#3d934e';
-      for(let i = 0; i < 10; i++) bgCtx.fillRect(20 + i * 80, h * 0.72, 20, 8);
+      drawBushes(w, h, '#3d934e');
       return;
     }
 
     drawSky('#7a97c5', '#2a3558');
+    drawSunOrMoon(w, h, false);
+    drawHills(w, h);
     drawGround('#4c587c');
     drawBuilding(40, h * 0.48, 120, 100, '#5f6f90');
     drawBuilding(w - 180, h * 0.48, 140, 100, '#5e6c89');
+    drawBushes(w, h, '#3b7f5c');
   }
 
   function drawFX(scene){
     const w = el.fxCanvas.clientWidth;
     const h = el.fxCanvas.clientHeight;
     fxCtx.clearRect(0,0,w,h);
-    if ((scene.bg || '').includes('rain')) {
-      fxCtx.strokeStyle = 'rgba(190,230,255,.52)';
-      for(let i = 0; i < 110; i++){
+    const bg = scene.bg || '';
+    if (bg.includes('rain')) {
+      fxCtx.strokeStyle = 'rgba(190,230,255,.55)';
+      for(let i = 0; i < 120; i++){
         const x = (i * 19 + (Date.now() / 20) % w) % w;
         const y = (i * 31) % h;
         fxCtx.beginPath();
@@ -260,15 +315,42 @@
         fxCtx.stroke();
       }
     }
+
+    if (bg.includes('sankranti') || bg.includes('wedding') || bg.includes('pelli') || bg.includes('anniversary')) {
+      for(let i = 0; i < 26; i++){
+        const x = (i * 41 + (Date.now() / 25) % w) % w;
+        const y = (i * 23 + (Date.now() / 90) % h) % h;
+        fxCtx.fillStyle = i % 2 ? 'rgba(255,219,130,0.55)' : 'rgba(255,168,187,0.5)';
+        fxCtx.beginPath();
+        fxCtx.arc(x, y, 2 + (i % 3), 0, Math.PI * 2);
+        fxCtx.fill();
+      }
+    }
+
+    if (!bg.includes('rain')) {
+      fxCtx.fillStyle = 'rgba(255,255,255,0.12)';
+      for(let i = 0; i < 18; i++){
+        const x = (i * 67 + (Date.now() / 60) % w) % w;
+        const y = (i * 43) % h;
+        fxCtx.fillRect(x, y, 1.5, 1.5);
+      }
+    }
   }
 
   function setPortraits(speaker){
     const left = ['Yagnesh','GD','Lokesh','Narrator'].includes(speaker) ? (speaker === 'Narrator' ? 'Yagnesh' : speaker) : 'Yagnesh';
     const right = speaker === 'Yogitha' || speaker === 'Apex Friend' ? (speaker === 'Apex Friend' ? 'Apex Friends' : 'Yogitha') : 'Yogitha';
+
+    const leftLook = left === 'GD' ? 'gd' : left === 'Lokesh' ? 'lokesh' : 'hero';
+    const rightLook = right === 'Yogitha' ? 'heroine' : right === 'Apex Friends' ? 'friends' : 'heroine';
+
     el.portraitL.dataset.name = left;
     el.portraitR.dataset.name = right;
-    el.portraitL.style.setProperty('--portrait-accent', '#78d8ff');
-    el.portraitR.style.setProperty('--portrait-accent', '#ff93bc');
+    el.portraitL.dataset.look = leftLook;
+    el.portraitR.dataset.look = rightLook;
+
+    el.portraitL.style.setProperty('--portrait-accent', leftLook === 'gd' ? '#87c8ff' : leftLook === 'lokesh' ? '#b6dc7c' : '#78d8ff');
+    el.portraitR.style.setProperty('--portrait-accent', rightLook === 'heroine' ? '#ff93bc' : '#ffd0a5');
   }
 
   function playTone(freq=220,duration=0.1,type='sine',gain=0.02){
